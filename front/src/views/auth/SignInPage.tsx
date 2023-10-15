@@ -21,6 +21,7 @@ function SignInPage(props: any) {
         const requestLogin = await authService.userLogin(email, password)
         if(requestLogin && !requestLogin.error) {
             const userInfo = requestLogin.data.user
+            localStorage.setItem("token", requestLogin.data.access_token);
             localStorage.setItem("sessionId", userInfo.sub);
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
             

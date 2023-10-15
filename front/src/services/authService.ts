@@ -39,6 +39,25 @@ class AuthService {
 
     return response;
   }
+
+  async userProfile(token: string) {
+    const response = await axios
+      .get(`${baseUrl}/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        return { data: res.data, error: null };
+      })
+      .catch((err) => {
+        return { error: err.message, data: null };
+      });
+
+    if (!response) throw new Error("Somthing went wrong");
+
+    return response;
+  }
 }
 
 export default AuthService;
